@@ -1,6 +1,7 @@
 # messengerr
 
-A new Flutter project.
+мессенджер на флаттере
+
 
 ## Getting Started
 
