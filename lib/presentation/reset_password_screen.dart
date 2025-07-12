@@ -9,9 +9,9 @@ import '../repositories/auth/reset_pasword_repository.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   final String email;
-  final String code;
+  final String reset_token;
 
-  const ResetPasswordScreen({Key? key, required this.email, required this.code}) : super(key: key);
+  const ResetPasswordScreen({Key? key, required this.email, required this.reset_token}) : super(key: key);
 
   @override
   State<ResetPasswordScreen> createState() => _ResetPasswordScreen();
@@ -32,7 +32,7 @@ class _ResetPasswordScreen extends State<ResetPasswordScreen> {
       await _resetPaswordRepository.resetPassword(
         email: widget.email,
         password: _passwordController.text,
-        code: widget.code
+          reset_token: widget.reset_token
       );
       Navigator.pushNamed(
         context,

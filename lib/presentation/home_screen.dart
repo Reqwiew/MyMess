@@ -23,12 +23,14 @@ class _HomeScreenState extends State<HomeScreen> {
       const SnackBar(content: Text('Токен скопирован в буфер обмена!')),
     );
   }
+
   Future<void> _logout() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove('access_token');
     setState(() {
       storedToken = null;
     });
+    print(prefs);
     Navigator.pushReplacementNamed(context, '/login');
   }
 

@@ -25,7 +25,7 @@ class _SendOtpScreen extends State<SendOtpScreen> {
 
     int? otpCode = int.tryParse(otpController.text);
 
-     if (otpCode == null) {
+    if (otpCode == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Пожалуйста, введите правильный код OTP')),
       );
@@ -33,32 +33,27 @@ class _SendOtpScreen extends State<SendOtpScreen> {
     }
 
     try {
-
-      await _sendOtpRepository.sendOtp(
+      final resetToken = await _sendOtpRepository.sendOtp(
         code: otpCode,
         email: widget.email,
       );
+
       Navigator.pushNamed(
         context,
         '/resetPassword',
         arguments: {
           'email': widget.email,
-          'code': otpCode.toString(),
+          'reset_token': resetToken,
         },
       );
-
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(e.toString())),
       );
     }
-  }
+}
 
-  @override
-  void dispose() {
-    otpFocusNode.dispose();  // Очистить ресурсы при закрытии экрана
-    super.dispose();
-  }
+
 
   @override
   Widget build(BuildContext context) {

@@ -1,15 +1,16 @@
 // lib/presentation/screens/home_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../repositories/auth/login_repository.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
-  State<LoginScreen> createState() => _LoginScreenSctate();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenSctate extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -20,24 +21,31 @@ class _LoginScreenSctate extends State<LoginScreen> {
   void _login() async {
     if (!_formKey.currentState!.validate()) return;
 
-
     try {
       await _loginRepository.loginUser(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
 
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        '/',
-            (Route<dynamic> route) => false,
-      );
+      final prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString('access_token');
+
+      if (token != null) {
+        Navigator.pushNamed(
+          context,
+          '/',
+          arguments: token,
+        );
+      } else {
+        throw Exception('Не удалось получить токен');
+      }
     } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(e.toString())));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.toString())),
+      );
     }
   }
+
 
   @override
   Widget build(BuildContext context) {

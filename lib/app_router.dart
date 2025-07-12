@@ -33,9 +33,9 @@ class AppRouter {
       case '/resetPassword':
         final args = settings.arguments as Map<String, String>;
         final email = args['email']!;
-        final code = args['code']!;
+        final reset_token = args['reset_token']!;
         return MaterialPageRoute(
-          builder: (_) => ResetPasswordScreen(email: email, code: code),
+          builder: (_) => ResetPasswordScreen(email: email, reset_token: reset_token),
         );
 
       default:

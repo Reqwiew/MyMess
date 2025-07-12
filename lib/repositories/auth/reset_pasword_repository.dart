@@ -5,12 +5,12 @@ class ResetPaswordRepository {
   Future<void> resetPassword({
     required String email,
     required String password,
-    required String code,
+    required String reset_token,
   }) async {
     try {
       final response = await DioClient.instance.post(
         'auth/update_password',
-        data: {'email': email, 'password': password, 'reset_token': code},
+        data: {'email': email, 'password': password, 'reset_token': reset_token},
       );
     } on DioException catch (e) {
       print('Dio ошибка: ${e.response?.data}');
