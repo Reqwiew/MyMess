@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../repositories/login/register_repository.dart'; // путь подгони под свой проект
+
+import '../repositories/auth/register_repository.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -82,6 +83,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             style: TextStyle(
                               color: Color(0xFF5852CB),
                               fontSize: 62,
+                              height: 1.0,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -168,7 +170,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 TextButton(
                                   onPressed: () => Navigator.pushNamed(context, '/login'),
                                   style: TextButton.styleFrom(
-                                    backgroundColor: Color(0xFF5852CB),
+                                    foregroundColor: Color(0xFF5852CB),
                                     padding: EdgeInsets.zero,
                                     minimumSize: Size(0, 0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,

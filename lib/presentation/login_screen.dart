@@ -1,7 +1,8 @@
 // lib/presentation/screens/home_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:messengerr/repositories/login/login_repository.dart';
+
+import '../repositories/auth/login_repository.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -35,8 +36,6 @@ class _LoginScreenSctate extends State<LoginScreen> {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text(e.toString())));
-    } finally {
-
     }
   }
 
@@ -127,15 +126,15 @@ class _LoginScreenSctate extends State<LoginScreen> {
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
                                 TextButton(
-                                  onPressed: () => Navigator.pushNamed(context, '/chat'),
+                                  onPressed: () => Navigator.pushNamed(context, '/forgotPassword'),
                                   style: TextButton.styleFrom(
                                     padding: EdgeInsets.zero,
                                     minimumSize: Size(0, 0),
-                                    tapTargetSize: MaterialTapTargetSize.shrinkWrap, // убирает лишнюю зону касания
+                                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                   ),
                                   child: const Text(
                                     'Не помню пароль',
-                                    style: TextStyle(height: 2.0), // убираем лишний line height
+                                    style: TextStyle(height: 2.0),
                                   ),
                                 ),
                                 TextButton(

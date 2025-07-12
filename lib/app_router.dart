@@ -1,9 +1,11 @@
 // lib/app_router.dart
 import 'package:flutter/material.dart';
 import 'package:messengerr/presentation/chat_screen.dart';
+import 'package:messengerr/presentation/forgot_password_screen.dart';
 import 'package:messengerr/presentation/home_screen.dart';
 import 'package:messengerr/presentation/login_screen.dart';
 import 'package:messengerr/presentation/register_screen.dart';
+import 'package:messengerr/presentation/send_otp_screen.dart';
 
 
 class AppRouter {
@@ -20,6 +22,13 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) =>  LoginScreen());
       case '/register':
         return MaterialPageRoute(builder: (_) =>  RegisterScreen());
+      case '/forgotPassword':
+        return MaterialPageRoute(builder: (_) =>  ForgotPasswordScreen());
+      case '/sendOtp':
+        final email = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => SendOtpScreen(email: email),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
