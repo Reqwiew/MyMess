@@ -128,6 +128,7 @@ class _LoginScreenSctate extends State<LoginScreen> {
                                 TextButton(
                                   onPressed: () => Navigator.pushNamed(context, '/forgotPassword'),
                                   style: TextButton.styleFrom(
+                                    foregroundColor: Color(0xFF5852CB),
                                     padding: EdgeInsets.zero,
                                     minimumSize: Size(0, 0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -141,6 +142,7 @@ class _LoginScreenSctate extends State<LoginScreen> {
                                   onPressed: () => Navigator.pushNamed(context, '/register'),
                                   style: TextButton.styleFrom(
                                     padding: EdgeInsets.zero,
+                                    foregroundColor: Color(0xFF5852CB),
                                     minimumSize: Size(0, 0),
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                   ),

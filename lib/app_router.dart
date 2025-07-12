@@ -5,6 +5,7 @@ import 'package:messengerr/presentation/forgot_password_screen.dart';
 import 'package:messengerr/presentation/home_screen.dart';
 import 'package:messengerr/presentation/login_screen.dart';
 import 'package:messengerr/presentation/register_screen.dart';
+import 'package:messengerr/presentation/reset_password_screen.dart';
 import 'package:messengerr/presentation/send_otp_screen.dart';
 
 
@@ -29,6 +30,14 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => SendOtpScreen(email: email),
         );
+      case '/resetPassword':
+        final args = settings.arguments as Map<String, String>;
+        final email = args['email']!;
+        final code = args['code']!;
+        return MaterialPageRoute(
+          builder: (_) => ResetPasswordScreen(email: email, code: code),
+        );
+
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

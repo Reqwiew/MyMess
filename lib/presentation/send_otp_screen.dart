@@ -18,7 +18,7 @@ class _SendOtpScreen extends State<SendOtpScreen> {
   final _formKey = GlobalKey<FormState>();
   final SendOtpRepository _sendOtpRepository = SendOtpRepository();
   final TextEditingController otpController = TextEditingController();
-  final FocusNode otpFocusNode = FocusNode();  // Добавляем FocusNode для управления фокусом
+  final FocusNode otpFocusNode = FocusNode();
 
   void _sendOtp() async {
     if (!_formKey.currentState!.validate()) return;
@@ -38,7 +38,15 @@ class _SendOtpScreen extends State<SendOtpScreen> {
         code: otpCode,
         email: widget.email,
       );
-      //TODO: Навигация после успешного получения OTP
+      Navigator.pushNamed(
+        context,
+        '/resetPassword',
+        arguments: {
+          'email': widget.email,
+          'code': otpCode.toString(),
+        },
+      );
+
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(e.toString())),
@@ -61,6 +69,7 @@ class _SendOtpScreen extends State<SendOtpScreen> {
       resizeToAvoidBottomInset: true,
       backgroundColor: Color(0xFFE0EBF4),
       body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
         child: ConstrainedBox(
           constraints: BoxConstraints(minHeight: screenHeight),
           child: Padding(
