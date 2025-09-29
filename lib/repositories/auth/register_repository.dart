@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../network/dio_client.dart';
 
-
 class RegisterRepository {
   Future<void> registerUser({
     required String email,
@@ -29,14 +28,28 @@ class RegisterRepository {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('access_token', token);
       } else {
-        throw Exception('Ошибка регистрации: ${data['error']}');
+        final errorMessage = data['error']?['message'] ??
+            data['error']?.toString() ??
+            data['message'] ??
+            'Неизвестная ошибка регистрации';
+        throw Exception(errorMessage);
       }
     } on DioException catch (e) {
       print('Dio ошибка: ${e.response?.data}');
-      throw Exception('Ошибка подключения: ${e.message}');
+
+      if (e.response != null && e.response!.data != null) {
+        final errorData = e.response!.data;
+        final errorMessage = errorData['error']?['message'] ??
+            errorData['error']?.toString() ??
+            errorData['message'] ??
+            'Ошибка сервера: ${e.response!.statusCode}';
+        throw Exception(errorMessage);
+      } else {
+        throw Exception('Ошибка подключения: ${e.message}');
+      }
     } catch (e) {
       print('Неизвестная ошибка: $e');
-      throw Exception('Произошла ошибка');
+      throw Exception('Произошла неизвестная ошибка');
     }
   }
 }

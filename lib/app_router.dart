@@ -4,6 +4,7 @@ import 'package:messengerr/presentation/chat_screen.dart';
 import 'package:messengerr/presentation/forgot_password_screen.dart';
 import 'package:messengerr/presentation/home_screen.dart';
 import 'package:messengerr/presentation/login_screen.dart';
+import 'package:messengerr/presentation/profile_screen.dart';
 import 'package:messengerr/presentation/register_screen.dart';
 import 'package:messengerr/presentation/reset_password_screen.dart';
 import 'package:messengerr/presentation/send_otp_screen.dart';
@@ -37,7 +38,8 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => ResetPasswordScreen(email: email, reset_token: reset_token),
         );
-
+      case '/profileScreen':
+        return MaterialPageRoute(builder: (_) =>  ProfileScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

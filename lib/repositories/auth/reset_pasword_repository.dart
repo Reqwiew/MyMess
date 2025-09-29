@@ -8,7 +8,7 @@ class ResetPaswordRepository {
     required String reset_token,
   }) async {
     try {
-      final response = await DioClient.instance.post(
+      await DioClient.instance.post(
         'auth/update_password',
         data: {'email': email, 'password': password, 'reset_token': reset_token},
       );
